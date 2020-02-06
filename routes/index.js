@@ -18,7 +18,7 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/signin", (req, res) => {
-  res.send("love");
+  res.render("signin");
 });
 
 
