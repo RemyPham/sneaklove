@@ -10,7 +10,7 @@ router.get("/sneakers/:cat", (req, res) => {
   sneakerModel
     .find()
     .then(dbRes => {
-      res.render("/products", {
+      res.render("products", {
         products: dbRes
       });
     })
