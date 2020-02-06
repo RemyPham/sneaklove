@@ -9,7 +9,7 @@ router.get("/prod-add", (req,res) =>{
 
 router.post("/prod-add", uploadCloud.single('photo'), (req,res,next) =>{
     const {name, ref, sizes, description, price, category, id_tags} = req.body;
-    const imgPath = req.file;
+    const imgPath = req.file.url;
     const newSneaker = new sneakerModel({name, ref, sizes, description, price, category, id_tags, imgPath});
 
     newSneaker
