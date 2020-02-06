@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const sneakerModel = require("../models/Sneaker");
 
-router.get("/", (req, res) => {
+router.get(["/", "/home"], (req, res) => {
   res.render("index");
 });
 
