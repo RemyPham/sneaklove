@@ -3,8 +3,12 @@
     <h1 class="form-title">Welcome Back !</h1>
     <p class="form-subtitle">Enjoy yourself and be comfortable </p>
   </header>
-  {{#if msg}}
+  {{!-- {{#if msg}}
   <p class="message {{msg.status}}">{{msg.text}}</p>
+  {{/if}} --}}
+
+  {{#if errorMessage}}
+    <p class="error-message">{{ errorMessage }}</p>
   {{/if}}
   <form method="post" action="/auth/signin" id="form_user">
     <div class="form-item-wrapper flexed-item">

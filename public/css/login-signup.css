@@ -58,5 +58,8 @@
   border-bottom: 1px solid rgb(52, 52, 255);
 }
 
-
-
+.error-message {
+  color: #F02B63;
+  text-align: center;
+  width: 100%;
+}
