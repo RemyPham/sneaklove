@@ -56,14 +56,18 @@ router.get("/signin", (req, res) => {
   
   
     if (!user.email || !user.password) {
-      return res.render("signin");
+      return res.render("signin", {
+        errorMessage: "Email AND Password REQUIRED!"
+      });
     }
   
     userModel
       .findOne({ email: user.email })
       .then(dbRes => {
         if (!dbRes) {
-          return res.render("signin");
+          return res.render("signin", {
+            errorMessage: "Email/Password Incorrect"
+          });
         }
         if (bcrypt.compareSync(user.password, dbRes.password)) {
 
@@ -75,7 +79,9 @@ router.get("/signin", (req, res) => {
           return res.redirect("/");
         } else {
           // encrypted password match failed
-          return res.redirect("/auth/signin");
+          return res.render("signin", {
+            errorMessage: "Email/Password Incorrect"
+          });
         }
       })
       .catch(next);
