@@ -31,4 +31,17 @@ router.post("/prod-add", uploadCloud.single('photo'), (req,res,next) =>{
 //     .catch(next);
 // })
 
+
+
+router.get("/prod-manage/", (req,res,next) => {
+    sneakerModel
+    .find()
+    .then(result => {
+        res.render("products_manage", {
+            sneakers: result
+        });
+    })
+    .catch(next)
+})
+
 module.exports = router;
