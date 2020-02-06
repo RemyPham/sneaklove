@@ -4,7 +4,6 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "bcrypt": "^3.0.6",
     "cloudinary": "^1.14.0",
     "connect-mongo": "^3.0.0",
     "cookie-parser": "^1.4.4",
@@ -17,7 +16,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon ./app.js -e js,hbs"
+    "dev": "nodemon ./bin/www -e .js,.hbs"
   },
   "keywords": [],
   "author": "",
