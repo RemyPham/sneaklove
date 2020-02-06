@@ -3,17 +3,23 @@
     <h1 class="form-title">Welcome Back !</h1>
     <p class="form-subtitle">Enjoy yourself and be comfortable </p>
   </header>
-  {{#if msg}}
+  {{!-- {{#if msg}}
   <p class="message {{msg.status}}">{{msg.text}}</p>
+  {{/if}} --}}
+
+  {{#if errorMessage}}
+    <p class="error-message">{{ errorMessage }}</p>
   {{/if}}
+
   <form method="post" action="/signin" id="form_user">
     <div class="form-item-wrapper flexed-item">
       <label for="email" class="label-ref label">Email</label>
-      <input id="email" type="email" class="input-text input" placeholder="albert.biceps@gmail.com" required value="yo@gui.com">
+      <input id="email" type="email" class="input-text input" placeholder="albert.biceps@gmail.com" required
+        value="yo@gui.com">
     </div>
     <div class="form-item-wrapper flexed-item">
       <label for="password" class="label-ref label">Password</label>
-      <input id="password" type="password"  class="input-text input" placeholder="••••••" required value="1234">
+      <input id="password" type="password" class="input-text input" placeholder="••••••" required value="1234">
     </div>
     <button class="button-primary white">Log in !</button>
   </form>

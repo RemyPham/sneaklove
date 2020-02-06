@@ -58,5 +58,12 @@
   border-bottom: 1px solid rgb(52, 52, 255);
 }
 
-
-
+.error-message {
+  /* background: #F02B63; */
+  /* box-sizing: border-box; */
+  color: #F02B63;
+  /* margin: auto; */
+  text-align: center;
+  /* padding: 20px; */
+  width: 100%;
+}
