@@ -21,9 +21,5 @@ router.get("/one-product/:id", (req, res) => {
   res.send("baz");
 });
 
-router.get("/signup", (req, res) => {
-  res.send("sneak");
-});
-
 
 module.exports = router;
