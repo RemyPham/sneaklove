@@ -6,19 +6,25 @@ router.get(["/", "/home"], (req, res) => {
   res.render("index");
 });
 
-router.get("/sneakers/:cat", (req, res) => {
+//DISPLAY SNEAKERS IN COLLECTION
+router.get("/sneakers/collection", (req, res, next) => {
   sneakerModel
     .find()
     .then(dbRes => {
       res.render("products", {
-        products: dbRes
+        sneakers: dbRes
       });
     })
-    .catch(dbErr => dbErr)
+    .catch(next)
 });
 
-router.get("/one-product/:id", (req, res) => {
-  res.send("baz");
+router.get("/one-product/:id", (req, res, next) => {
+  sneakerModel
+  .findById(req.params.id)
+  .then(dbRes => {
+    res.render("one_product", {sneaker: dbRes})
+  })
+  .catch(next)
 });
 
 
