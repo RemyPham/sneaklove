@@ -77,7 +77,7 @@ app.use(eraseSessionMessage());
 // Getting/Using router(s)
 const basePageRouter = require("./routes");
 app.use("/", basePageRouter);
-
+app.use("/auth", require("./routes/auth"))
 
 
 // app.listen(process.env.PORT, () => {
