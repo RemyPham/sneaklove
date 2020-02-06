@@ -14,7 +14,8 @@ const sneakerSchema = new Schema({
     id_tags: {
         type: Schema.Types.ObjectId,
         ref: "Tag"
-    }
+    },
+    imgPath: String,
 })
 
 const sneakerModel = mongoose.model("Sneaker", sneakerSchema);
