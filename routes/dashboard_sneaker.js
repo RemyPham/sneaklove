@@ -32,8 +32,8 @@ router.post("/prod-add", uploadCloud.single('photo'), (req,res,next) =>{
 // })
 
 
-
-router.get("/prod-manage/", (req,res,next) => {
+// DISPLAY SNEAKERS
+router.get("/prod-manage", (req,res,next) => {
     sneakerModel
     .find()
     .then(result => {
@@ -43,5 +43,31 @@ router.get("/prod-manage/", (req,res,next) => {
     })
     .catch(next)
 })
+
+
+
+//EDIT SNEAKER
+router.get("/prod-edit/:id", (req, res, next) => {
+    sneakerModel
+    .findById(req.params.id)
+    .then(dbRes => {
+        res.render("product_edit", { sneaker: dbRes });
+    })
+    .catch(next);
+});
+
+router.post("/product-edit/:id", (req, res, next) => {
+    const {name, ref, sizes, description, price, category, id_tags} = req.body;
+  
+    sneakerModel
+      .findByIdAndUpdate(req.params.id, {name, ref, sizes, description, price, category, id_tags})
+      .then(() => {
+        //MESSAGE TO PUT HERE
+        res.redirect("/product-edit")
+      })
+      .catch(next);
+});
+
+
 
 module.exports = router;
