@@ -56,18 +56,29 @@ router.get("/prod-edit/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/product-edit/:id", (req, res, next) => {
+router.post("/prod-edit/:id", (req, res, next) => {
     const {name, ref, sizes, description, price, category, id_tags} = req.body;
   
     sneakerModel
-      .findByIdAndUpdate(req.params.id, {name, ref, sizes, description, price, category, id_tags})
-      .then(() => {
+    .findByIdAndUpdate(req.params.id, {name, ref, sizes, description, price, category, id_tags})
+    .then(dbRes => {
         //MESSAGE TO PUT HERE
-        res.redirect("/product-edit")
-      })
-      .catch(next);
+        res.redirect("/sec/prod-manage")
+    })
+    .catch(next);
 });
 
+
+// DELETE SNEAKER
+router.get("/prod-delete/:id", (req, res, next) => {
+    sneakerModel
+    .findByIdAndDelete(req.params.id)
+    .then(dbRes => {
+        //ADD MSG HERE
+        res.redirect("/sec/prod-manage")
+    })
+    .catch(next);
+});
 
 
 module.exports = router;
