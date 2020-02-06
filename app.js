@@ -57,6 +57,15 @@ function checkloginStatus(req, res, next) {
   next(); // continue to the requested route
 }
 
+//PROTECT ROUTE : MUST BE LOGGED IN
+//Middleware to call in GET
+ module.exports = function protectRoute(req, res, next) {
+  if (req.session.currentUser) next();
+  else res.redirect("/auth/signin");
+}
+
+
+
 function eraseSessionMessage() {
   var count = 0; // initialize counter in parent scope and use it in inner function
   return function(req, res, next) {
@@ -74,10 +83,12 @@ function eraseSessionMessage() {
 app.use(checkloginStatus);
 app.use(eraseSessionMessage());
 
+
 // Getting/Using router(s)
 const basePageRouter = require("./routes");
 app.use("/", basePageRouter);
-app.use("/auth", require("./routes/auth"))
+app.use("/auth", require("./routes/auth"));
+app.use("/sec", require("./routes/dashboard_sneaker"))
 
 
 // app.listen(process.env.PORT, () => {
