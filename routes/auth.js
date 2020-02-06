@@ -17,7 +17,7 @@ router.get("/signup", (req, res) => {
 // CREATE ACCOUNT SIGNUP
 router.post("/signup", (req, res, next) => {
     const user = req.body; 
-    console.log(user);
+
     if (!user.email || !user.password) {
       return res.render("signup", {
           errorMessage: "Email AND Password REQUIRED!"
@@ -43,8 +43,53 @@ router.post("/signup", (req, res, next) => {
         })
         .catch(next);
     }
+});
+
+
+// LOG IN INTO ACCOUNT
+router.get("/signin", (req, res) => {
+    res.render("signin");
   });
+  
+    router.post("/signin", (req, res, next) => {
+    const user = req.body;
+  
+  
+    if (!user.email || !user.password) {
+      return res.render("signin");
+    }
+  
+    userModel
+      .findOne({ email: user.email })
+      .then(dbRes => {
+        if (!dbRes) {
+          return res.render("signin");
+        }
+        if (bcrypt.compareSync(user.password, dbRes.password)) {
+
+          const { _doc: clone } = { ...dbRes }; 
+          
+          delete clone.password; 
+          
+          req.session.currentUser = clone; 
+          return res.redirect("/");
+        } else {
+          // encrypted password match failed
+          return res.redirect("/auth/signin");
+        }
+      })
+      .catch(next);
+});
 
 
+
+
+//LOG OUT
+router.get("/logout", (req, res) => {
+    req.session.destroy(() => {
+      res.locals.isLoggedIn = undefined;
+      res.redirect("/auth/signin");
+    });
+  });
 
 module.exports = router;
