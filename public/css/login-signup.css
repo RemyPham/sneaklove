@@ -59,11 +59,7 @@
 }
 
 .error-message {
-  /* background: #F02B63; */
-  /* box-sizing: border-box; */
   color: #F02B63;
-  /* margin: auto; */
   text-align: center;
-  /* padding: 20px; */
   width: 100%;
 }
