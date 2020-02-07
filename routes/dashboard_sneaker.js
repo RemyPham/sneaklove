@@ -49,10 +49,15 @@ router.get("/prod-manage", (req,res,next) => {
 
 //EDIT SNEAKER
 router.get("/prod-edit/:id", (req, res, next) => {
-    sneakerModel
-    .findById(req.params.id)
+    Promise.all([
+        sneakerModel.findById(req.params.id),
+        tagModel.find()
+    ])
     .then(dbRes => {
-        res.render("product_edit", { sneaker: dbRes });
+        res.render("product_edit", {
+            sneaker: dbRes[0],
+            tags: dbRes[1]
+        });
     })
     .catch(next);
 });
@@ -92,20 +97,8 @@ router.post("/axios-post", (req,res, next) => {
     .then(dbSuccess => 
         res.send(dbSuccess))
     .catch(next)
-    // const labels = req.body.labels
-    //create your label
 })
 
-// router.get("/prod-add", (req,res,next) => {
-//     tagModel
-//     .find()
-//     .then(result => {
-//         res.render("products_add",{
-//             tags : result
-//         })
-//     })
-//     .catch(next)
-// })
 
 
 
