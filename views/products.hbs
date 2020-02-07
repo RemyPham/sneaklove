@@ -23,7 +23,15 @@
         {{#compare category "collection" operator="!="}}
         {{category}}
         {{/compare}}
-        collection <span id="products_count" class="products-count">({{sneaker.length}})</span>
+        collection <span id="products_count" class="products-count">(
+          {{!-- number of products per category --}}
+          {{#compare category "collection" operator="==="}}
+            {{sneaker.length}} 
+          {{/compare}}
+          {{#compare category "collection" operator="!="}}
+            {{sneaker.length}}
+          {{/compare}}
+          )</span>
       </h4>
       <p class="products-subtitle">Prepare for your miles with the latest styles and colors of
         {{#compare category "collection" operator="==="}}
@@ -40,16 +48,9 @@
     <p>Sorry, no sneakers yet !</p>
     {{/unless}}
     <div id="products_grid" class="products-grid flexed-item">
-      {{#compare category "collection" operator="==="}}
         {{#each sneaker}}
-          {{> sneaker_mini }}
+        {{> sneaker_mini }}
         {{/each}}
-      {{/compare}}
-      {{#compare category "collection" operator="!="}}
-        {{#compare category sneaker.category operator="==="}}
-          {{> sneaker_mini }}
-        {{/compare}}
-      {{/compare}}
     </div>
   </section>
 </div>

@@ -9,13 +9,14 @@ router.get(["/", "/home"], (req, res) => {
 // DISPLAY SNEAKERS IN COLLECTION
 
 router.get("/sneakers/:cat", (req, res, next) => {
+  const cat = req.params.cat;
+  const query = cat === 'collection' ? {} : { category: cat}
   sneakerModel
-    .find() // collection/men/women/kids
-    // console.log(req.params.cat)
+    .find(query)
     .then(dbRes => {
       res.render("products", {
         sneaker: dbRes,
-        category: req.params.cat
+        category: req.params.cat // collection/men/women/kids
       });
     })
     .catch(next)
