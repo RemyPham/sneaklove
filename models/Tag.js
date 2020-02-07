@@ -5,7 +5,6 @@ const tagSchema = new Schema({
     label: {
         type: String,
         unique: true,
-        required: true,
     }
 })
 
