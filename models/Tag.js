@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const tagSchema = new Schema({
-    label: String
+    label: {
+        type: String,
+        required: true
+    }
 })
 
 const tagModel = mongoose.model("Tag", tagSchema);
