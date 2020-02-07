@@ -7,20 +7,26 @@ router.get(["/", "/home"], (req, res) => {
   res.render("index");
 });
 
-//DISPLAY SNEAKERS IN COLLECTION
-router.get("/sneakers/collection", (req, res, next) => {
+// DISPLAY SNEAKERS IN COLLECTION
+
+router.get("/sneakers/:cat", (req, res, next) => {
+  const cat = req.params.cat;
+  const query = cat === 'collection' ? {} : { category: cat}
   Promise.all([
-    sneakerModel.find(),
+    sneakerModel.find(query),
     tagModel.find()
   ])
     .then(dbRes => {
       res.render("products", {
-        sneakers: dbRes[0],
-        tags: dbRes[1]
+        sneaker: dbRes[0],
+        category: cat, // collection/men/women/kids
+        tags: dbRes[1] 
       });
     })
     .catch(next)
 });
+
+
 
 router.get("/one-product/:id", (req, res, next) => {
   sneakerModel
