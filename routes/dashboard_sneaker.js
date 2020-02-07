@@ -3,9 +3,10 @@ const router = new express.Router(); // create an app sub-module (router)
 const uploadCloud = require('../config/cloudinary');
 const sneakerModel = require('../models/Sneaker');
 const tagModel = require('../models/Tag');
+const protectRoute = require("../middlewares/protectRoute")
 
 
-router.get("/prod-add", (req,res,next) =>{
+router.get("/prod-add", protectRoute, (req,res,next) =>{
     tagModel
     .find()
     .then(tagsResult => {
@@ -34,7 +35,7 @@ router.post("/prod-add", uploadCloud.single('photo'), (req,res,next) =>{
 
 
 // DISPLAY SNEAKERS
-router.get("/prod-manage", (req,res,next) => {
+router.get("/prod-manage", protectRoute, (req,res,next) => {
     sneakerModel
     .find()
     .then(result => {
@@ -48,7 +49,7 @@ router.get("/prod-manage", (req,res,next) => {
 
 
 //EDIT SNEAKER
-router.get("/prod-edit/:id", (req, res, next) => {
+router.get("/prod-edit/:id", protectRoute, (req, res, next) => {
     Promise.all([
         sneakerModel.findById(req.params.id),
         tagModel.find()
@@ -76,7 +77,7 @@ router.post("/prod-edit/:id", (req, res, next) => {
 
 
 // DELETE SNEAKER
-router.get("/prod-delete/:id", (req, res, next) => {
+router.get("/prod-delete/:id", protectRoute, (req, res, next) => {
     sneakerModel
     .findByIdAndDelete(req.params.id)
     .then(dbRes => {
