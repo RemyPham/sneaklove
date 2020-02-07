@@ -25,7 +25,7 @@
         {{/compare}}
         collection <span id="products_count" class="products-count">({{sneaker.length}})</span>
       </h4>
-      <p class="products-subtitle">Prepare for your miles with the latest styles and colors of 
+      <p class="products-subtitle">Prepare for your miles with the latest styles and colors of
         {{#compare category "collection" operator="==="}}
         the entire collection's
         {{/compare}}
@@ -40,9 +40,16 @@
     <p>Sorry, no sneakers yet !</p>
     {{/unless}}
     <div id="products_grid" class="products-grid flexed-item">
-      {{#each sneaker}}
-      {{> sneaker_mini }}
-      {{/each}}
+      {{#compare category "collection" operator="==="}}
+        {{#each sneaker}}
+          {{> sneaker_mini }}
+        {{/each}}
+      {{/compare}}
+      {{#compare category "collection" operator="!="}}
+        {{#compare category sneaker.category operator="==="}}
+          {{> sneaker_mini }}
+        {{/compare}}
+      {{/compare}}
     </div>
   </section>
 </div>

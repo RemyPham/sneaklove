@@ -6,28 +6,9 @@ router.get(["/", "/home"], (req, res) => {
   res.render("index");
 });
 
-//DISPLAY SNEAKERS IN COLLECTION
-
-// router.get("/sneakers/collection", (req, res, next) => {
-//   sneakerModel
-//     .find()
-//     .then(dbRes => {
-//       res.render("products", {
-//         sneakers: dbRes
-//       });
-//     })
-//     .catch(next)
-// });
+// DISPLAY SNEAKERS IN COLLECTION
 
 router.get("/sneakers/:cat", (req, res, next) => {
-  // const category = req.params.cat;
-  // if (category === "collection") {
-  //   sneakerModel.find()
-  // }
-  // else {
-  //   sneakerModel
-  //   .find(category)
-  // }
   sneakerModel
     .find() // collection/men/women/kids
     // console.log(req.params.cat)
