@@ -8,12 +8,16 @@ addTagBtn.onclick = function () {
 //get their ids
 // []   
     axios.post("/sec/axios-post", {
-        //this become the req.body for the back
         label: tagInput.value,
     })
     .then(dbRes => {
-        console.log("HERE", dbRes)
-        //dom manipulation to include that new label
+        const { id, label } = dbRes.data
+        const tag = 
+        `
+        <option value="${id}">${label}</option>
+        `;
+        document.getElementById("tags").innerHTML += tag;
+        
 
     })
     .catch(dbErr => console.log("error", dbErr))

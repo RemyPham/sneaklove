@@ -2,12 +2,20 @@ const express = require("express"); // import express in this module
 const router = new express.Router(); // create an app sub-module (router)
 const uploadCloud = require('../config/cloudinary');
 const sneakerModel = require('../models/Sneaker');
+const tagModel = require('../models/Tag');
 
 
-router.get("/prod-add", (req,res) =>{
-    res.render("products_add", {
-        scripts: ["client"]
-    });
+router.get("/prod-add", (req,res,next) =>{
+    tagModel
+    .find()
+    .then(tagsResult => {
+        res.render("products_add", {
+            scripts: ["client"],
+            tags: tagsResult
+        });
+    })
+    .catch(next)
+    
 })
 
 router.post("/prod-add", uploadCloud.single('photo'), (req,res,next) =>{
@@ -75,29 +83,29 @@ router.get("/prod-delete/:id", (req, res, next) => {
 
 
 // AXIOS ADD TAG (check client.js)
-const tagModel = require('../models/Tag');
 
-router.post("/axios-post", (req,res) => {
+router.post("/axios-post", (req,res, next) => {
 
     const tag = req.body;
     tagModel
     .create(tag)
-    .then(dbSuccess => dbSuccess)
-    .catch(dbErr => dbErr)
+    .then(dbSuccess => 
+        res.send(dbSuccess))
+    .catch(next)
     // const labels = req.body.labels
     //create your label
 })
 
-router.get("/prod-add", (req,res,next) => {
-    tagModel
-    .find()
-    .then(result => {
-        res.render("products_add",{
-            tags : result
-        })
-    })
-    .catch(next)
-})
+// router.get("/prod-add", (req,res,next) => {
+//     tagModel
+//     .find()
+//     .then(result => {
+//         res.render("products_add",{
+//             tags : result
+//         })
+//     })
+//     .catch(next)
+// })
 
 
 
