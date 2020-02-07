@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const tagSchema = new Schema({
     label: {
         type: String,
-        unique: true
+        unique: true,
+        required: true,
     }
 })
 
