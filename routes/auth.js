@@ -17,6 +17,7 @@ router.get("/signup", (req, res) => {
 // CREATE ACCOUNT SIGNUP
 router.post("/signup", (req, res, next) => {
     const user = req.body; 
+    console.log(user)
 
     if (!user.email || !user.password) {
       return res.render("signup", {

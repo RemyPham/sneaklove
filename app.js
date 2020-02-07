@@ -91,9 +91,5 @@ app.use("/auth", require("./routes/auth"));
 app.use("/sec", require("./routes/dashboard_sneaker"))
 
 
-// app.listen(process.env.PORT, () => {
-//   console.log(
-//     `app started at ${process.env.SITE_URL}:${process.env.PORT}`
-//   );
-// });
+
 module.exports = app;
